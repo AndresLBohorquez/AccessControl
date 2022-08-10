@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3c.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <title>Control Usuarios</title>
+        <!-- Tell the browser to be responsive to screen width -->
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="resources/plugins/fontawesome-free/css/all.min.css"/>
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"></link>
+        <!-- DataTables -->
+        <link rel="stylesheet" href="resources/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css"/>
+        <link rel="stylesheet" href="resources/plugins/datatables-responsive/css/responsive.bootstrap4.min.css"/>
+        <!-- Theme style -->
+        <link rel="stylesheet" href="resources/dist/css/adminlte.min.css"/>
+        <!-- Google Font: Source Sans Pro -->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"/>
+
+
+    </h:head>
+    <h:body class="hold-transition sidebar-mini">
+
+        <!-- /.card -->
+
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title col-10">Control Usuarios</h5>
+                <a href="registro_usuario.xhtml" class="col">Registrar Usuario</a>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body ">
+
+                <table id="example1" class="table table-responsive table-bordered table-striped shadow-lg p-3 mb-5 bg-body rounded">
+                    <thead>
+                        <tr >
+                            <th>Primer Apellido</th>
+                            <th>Segundo Apellido</th>
+                            <th>Primer Nombre</th>
+                            <th>Otros Nombres</th>
+                            <th>Pais</th>
+                            <th>Tipo ID</th>
+                            <th>Número ID</th>
+                            <th>Correo</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <c:forEach items="#{controllerApplication.listaUsuario}" var="user">
+                            <tr>
+                                <h:form>
+                                    <td><h:commandLink action="#{controllerApplication.perfilUsuario(user.idusuario)}"> #{user.primerApellido}</h:commandLink></td>
+                                </h:form>
+                                <td>#{user.segundoApellido}</td>
+                                <td>#{user.primerNombre}</td>
+                                <td>#{user.otrosNombres}</td>
+                                <td>#{user.paisEmpleoidpais.nombrePais}</td>
+                                <td>#{user.tipoIdentificacionIdtipoId.nombreId}</td>
+                                <td>#{user.numeroIdentificacion}</td>
+                                <td>#{user.correoElectronico}</td>
+                                <td>#{user.estadoIdestado.nombreEstado}</td>
+                                <td>
+                                    <div class="row">
+                                        <div>
+                                            <h:form class="col ml-2">
+                                                <h:commandLink action="#{controllerApplication.seleccionarUsuario(user.idusuario)}" class="btn-outline-primary">
+                                                    <i class="bi bi-pencil"></i>
+                                                </h:commandLink>
+                                            </h:form>
+                                        </div>
+                                        <div class="col">
+                                            <h:form>
+                                                <h:commandLink action="#{controllerApplication.eliminarUsuario(user)}" class="btn-outline-danger ml-2">
+                                                    <i class="bi bi-trash3"></i>
+                                                </h:commandLink>
+                                            </h:form>
+                                        </div>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        </c:forEach>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+
+
+        <!--Sweet Allert-->
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- jQuery -->
+        <script src="resources/plugins/jquery/jquery.min.js"></script>
+        <!-- Bootstrap 4 -->
+        <script src="resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- DataTables -->
+        <script src="resources/plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="resources/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+        <script src="resources/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+        <script src="resources/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="resources/dist/js/adminlte.min.js"></script>
+        <!-- AdminLTE for demo purposes -->
+        <script src="resources/dist/js/demo.js"></script>
+        <!-- page script -->
+        <script>
+            $(function () {
+                $("#example1").DataTable({
+                    "responsive": true,
+                    "autoWidth": true,
+                });
+                $('#example2').DataTable({
+                    "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": true,
+                    "responsive": true,
+                });
+            });
+        </script>
+
+    </h:body>
+</html>
